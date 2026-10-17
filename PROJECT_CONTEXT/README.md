@@ -21,10 +21,10 @@ Read this file first when resuming work in a new session.
 | 4 | A4 Nutrition AI + Backup/Restore | DONE — typecheck/lint clean, 436/436 tests | [STAGE_04_AI_BACKUP.md](./STAGE_04_AI_BACKUP.md) |
 | 5 | A5 Photos + Journeys | DONE — typecheck/lint clean, 536/536 tests | [STAGE_05_PHOTOS.md](./STAGE_05_PHOTOS.md) |
 | 6 | A6 Body + Journal + Progress | DONE — typecheck/lint clean, 635/635 tests | [STAGE_06_BODY_JOURNAL_PROGRESS.md](./STAGE_06_BODY_JOURNAL_PROGRESS.md) |
-| 7 | A7 Shell (routes, providers, Today, Settings, Onboarding, README) | NOT STARTED | — |
+| 7 | A7 Shell (routes, providers, Today, Settings, Onboarding, README) | DONE — typecheck/lint clean, 100/100 shell tests | [STAGE_07_SHELL.md](./STAGE_07_SHELL.md) |
 | 8 | Integration gates (contract script, typecheck, lint, jest) | NOT STARTED | — |
 
-**Next:** Stage 7 — A7 Shell. Read `docs/architecture/agent-prompts/AGENT_07_PROMPT.md`.
+**Next:** Stage 8 — Integration gates. Write `scripts/check-contract.mjs` (layering + registry + route checks), then re-run typecheck, lint, jest.
 
 ### Current gates (re-run after every stage)
 
@@ -34,7 +34,7 @@ npm run lint        # must be silent
 npx jest            # must be 0 failures
 ```
 
-Status: typecheck PASS · lint PASS · **635 tests passing in 40 suites**.
+Status: typecheck PASS · lint PASS · **717 tests passing in 45 suites**.
 
 ### Watch out for at the next stage
 

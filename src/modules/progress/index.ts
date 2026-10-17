@@ -14,6 +14,10 @@ export { exerciseConsistencyByWeek, weeklyNutritionAverages } from './domain/tre
 // CMP-PRG-001
 export { ProgressScreen } from './screens/ProgressScreen';
 
+// CMP-PRG-002 (added at Stage 7 integration: the screen existed but the index never exported it,
+// so CONTRACT §4's `summary/[date].tsx` row had nothing to import).
+export { DailySummaryScreen } from './screens/DailySummaryScreen';
+
 // LOCAL-WORKAROUND (A6): the SVG charts are dependency-free presentational components shared by
 // progress and ody, so they live at @/shared/ui/charts/* (see the note in LineChart.tsx).
 // They are NOT re-exported here, which would recreate a ody -> progress edge.

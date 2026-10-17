@@ -25,12 +25,12 @@ import type { DailySummary } from '@/shared/types/summary';
 import type { LocalDate } from '@/shared/types/common';
 
 export interface DailySummaryScreenProps {
-  localDate: LocalDate;
+  date: LocalDate;
 }
 
-export function DailySummaryScreen({ localDate }: DailySummaryScreenProps): React.JSX.Element {
-  const load = useCallback(async (): Promise<DailySummary> => getDailySummary(localDate), [localDate]);
-  const { data, loading, error } = useFocusLoad(load, [localDate]);
+export function DailySummaryScreen({ date }: DailySummaryScreenProps): React.JSX.Element {
+  const load = useCallback(async (): Promise<DailySummary> => getDailySummary(date), [date]);
+  const { data, loading, error } = useFocusLoad(load, [date]);
 
   if (loading && !data) {
     return (
@@ -58,7 +58,7 @@ export function DailySummaryScreen({ localDate }: DailySummaryScreenProps): Reac
 
   return (
     <Screen>
-      <AppText variant="title">{formatDisplayDate(localDate)}</AppText>
+      <AppText variant="title">{formatDisplayDate(date)}</AppText>
       <AppText muted>What you recorded. No interpretation.</AppText>
       <ErrorBanner error={error} />
 
