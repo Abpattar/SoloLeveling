@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "Recovery & Fitness",
+    "slug": "recovery-fitness",
+    "scheme": "recoveryfitness",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "plugins": [
+      "expo-router",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Used to photograph your meals and progress.",
+          "recordAudioAndroid": false
+        }
+      ],
+      "expo-notifications",
+      "expo-secure-store",
+      "expo-sqlite"
+    ],
+    "android": {
+      "package": "com.personal.recoveryfitness",
+      "allowBackup": false,
+      "permissions": ["CAMERA", "POST_NOTIFICATIONS", "SCHEDULE_EXACT_ALARM"]
+    },
+    "experiments": {
+      "typedRoutes": false
+    }
+  }
+}

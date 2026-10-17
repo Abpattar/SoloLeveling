@@ -1,0 +1,27 @@
+node_modules/
+.expo/
+android/
+ios/
+dist/
+coverage/
+*.apk
+*.aab
+.env
+.env.*
+!.env.example
+npm-debug.log*
+yarn-error.log*
+.DS_Store
+
+# build / tooling junk
+*.tsbuildinfo
+*.log
+.eslintcache
+.expo-shared/
+*.orig
+*.rej
+
+# agent prompt packs - not part of the app
+docs/architecture/agent-prompts/
+docs/architecture/opencode/
+docs/architecture/integration/
