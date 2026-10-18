@@ -22,9 +22,9 @@ Read this file first when resuming work in a new session.
 | 5 | A5 Photos + Journeys | DONE — typecheck/lint clean, 536/536 tests | [STAGE_05_PHOTOS.md](./STAGE_05_PHOTOS.md) |
 | 6 | A6 Body + Journal + Progress | DONE — typecheck/lint clean, 635/635 tests | [STAGE_06_BODY_JOURNAL_PROGRESS.md](./STAGE_06_BODY_JOURNAL_PROGRESS.md) |
 | 7 | A7 Shell (routes, providers, Today, Settings, Onboarding, README) | DONE — typecheck/lint clean, 100/100 shell tests | [STAGE_07_SHELL.md](./STAGE_07_SHELL.md) |
-| 8 | Integration gates (contract script, typecheck, lint, jest) | NOT STARTED | — |
+| 8 | Integration gates (contract script, typecheck, lint, jest) | DONE — all four gates green, 722/722 tests | [STAGE_08_GATES.md](./STAGE_08_GATES.md) |
 
-**Next:** Stage 8 — Integration gates. Write `scripts/check-contract.mjs` (layering + registry + route checks), then re-run typecheck, lint, jest.
+**Next:** install the debug APK on a phone and verify the runtime, then exercise the app end to end (onboarding → add an exercise → run a session → log a meal → take a progress photo → export a backup).
 
 ### Current gates (re-run after every stage)
 
@@ -34,7 +34,21 @@ npm run lint        # must be silent
 npx jest            # must be 0 failures
 ```
 
-Status: typecheck PASS · lint PASS · **717 tests passing in 45 suites**.
+Status: contract-check PASS · typecheck PASS · lint PASS (0 problems) · **722 tests passing in 46 suites**.
+
+### Windows build notes (verified 2026-10-18)
+
+- `npx expo prebuild --platform android --no-install` generates `android/`. It is gitignored, so
+  the native project is not committed; regenerate it after a fresh clone.
+- Toolchain used: Temurin JDK 17.0.20.1, Android SDK platform-tools + `platforms;android-36` +
+  `build-tools;36.0.0`, installed under `%LOCALAPPDATA%\Android\Sdk`.
+- `android\gradlew.bat -p android assembleDebug` produced `app-debug.apk`
+  (`com.personal.recoveryfitness`, minSdk 24, targetSdk 36, 4 ABIs, ~219 MB — debug builds are
+  large because they ship every ABI unstripped).
+- APK is a **debug** build: installable for testing, not for distribution. `adb install -r` after
+  enabling USB debugging on the phone.
+- **Runtime is still unverified** — no device or emulator was available, so DB migrations, camera,
+  notifications and SQLite have never actually executed.
 
 ### Watch out for at the next stage
 

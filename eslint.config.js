@@ -21,4 +21,12 @@ module.exports = [
       'import/first': 'off',
     },
   },
+  {
+    // Build/verification scripts are run in a terminal and their only output channel IS stdout.
+    // The no-console rule exists to keep app code logging through `logger`, not to silence CLIs.
+    files: ['scripts/**/*.mjs', 'scripts/**/*.js'],
+    rules: {
+      'no-console': 'off',
+    },
+  },
 ];

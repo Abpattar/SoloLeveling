@@ -81,9 +81,7 @@ jest.mock('@/shared/settings/settingsRepository', () => ({
   updateSettings: jest.fn(async (patch: unknown) => patch),
   resetAiConsent: jest.fn(async () => ({})),
 }));
-// eslint-disable-next-line @typescript-eslint/no-require-imports -- pulled in after the mocks above.
 import { SettingsProvider } from '@/shared/settings/SettingsProvider';
-// eslint-disable-next-line @typescript-eslint/no-require-imports -- pulled in after the mocks above.
 import { getProfile } from '@/shared/data/profileRepository';
 
 const getProfileMock = getProfile as jest.MockedFunction<typeof getProfile>;

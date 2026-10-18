@@ -19,20 +19,15 @@ jest.mock('../../shared/data/profileRepository', () => ({
 }));
 jest.mock('../../modules/photos', () => ({ createFirstJourney: jest.fn(async () => undefined) }));
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports -- pulled in after the mocks above.
 import {
   acknowledgeDisclaimer,
   completeOnboarding,
   getProfile,
-  updateProfile,
 } from '../../shared/data/profileRepository';
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 import { createFirstJourney } from '../../modules/photos';
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 import { router } from 'expo-router';
 
 const getProfileMock = getProfile as jest.MockedFunction<typeof getProfile>;
-const updateProfileMock = updateProfile as jest.MockedFunction<typeof updateProfile>;
 const acknowledgeDisclaimerMock = acknowledgeDisclaimer as jest.MockedFunction<
   typeof acknowledgeDisclaimer
 >;

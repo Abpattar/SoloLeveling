@@ -35,7 +35,6 @@ jest.mock('@/modules/food', () => {
     TodayFoodCard: jest.fn(() => R.createElement(RN.Text, null, 'food-card')),
   };
 });
-// eslint-disable-next-line @typescript-eslint/no-require-imports -- pulled in after the mocks above.
 import { useActiveJourney } from '@/modules/photos';
 
 const useActiveJourneyMock = useActiveJourney as jest.MockedFunction<typeof useActiveJourney>;

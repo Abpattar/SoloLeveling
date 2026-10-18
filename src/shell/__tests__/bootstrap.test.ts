@@ -4,7 +4,7 @@
  *          database may reject; reminders and photo analysis failures are logged, not thrown.
  */
 import { AppState } from 'react-native';
-import { resetBootstrapForTesting } from '../bootstrap';
+import { bootstrapApp, resetBootstrapForTesting } from '../bootstrap';
 
 jest.mock('../../shared/db/database', () => ({
   getDb: jest.fn(async () => ({ name: 'test-db' })),
@@ -24,15 +24,9 @@ jest.mock('../../modules/nutrition-ai', () => ({
   estimateNutritionFromImage: jest.fn(async () => ({ ok: false, error: new Error('unused') })),
 }));
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports -- pulled in after the mocks above.
-import { bootstrapApp } from '../bootstrap';
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 import { getDb } from '../../shared/db/database';
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 import { initializeReminders } from '../../modules/reminders';
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 import { processPendingAnalyses, setEstimatorBridge } from '../../modules/food';
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 import { estimateNutritionFromImage, getAnalysisAvailability } from '../../modules/nutrition-ai';
 
 const getDbMock = getDb as jest.MockedFunction<typeof getDb>;
