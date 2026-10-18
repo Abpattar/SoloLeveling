@@ -99,7 +99,9 @@ async function makeEntry(overrides: { capturedAt?: string; categoryId?: Id } = {
   return createFoodEntryFromPhoto({
     mealCategoryId: overrides.categoryId ?? 'meal-lunch',
     tempImageUri: 'file:///tmp/capture.jpg',
-    capturedAt: overrides.capturedAt ?? NOW,
+    // Fresh per call: the repository rejects captures more than 60s in the future, and a
+    // module-level timestamp goes stale on a slow run.
+    capturedAt: overrides.capturedAt ?? new Date().toISOString(),
   });
 }
 
@@ -137,7 +139,7 @@ describe('createFoodEntryFromPhoto (API-FOOD-006)', () => {
     const entry = await createFoodEntryFromPhoto({
       mealCategoryId: 'meal-lunch',
       tempImageUri: 'file:///tmp/capture.jpg',
-      capturedAt: NOW,
+      capturedAt: new Date().toISOString(),
       analysisOptOut: true,
     });
     expect(entry.analysisStatus).toBe('skipped_by_user');
@@ -147,7 +149,7 @@ describe('createFoodEntryFromPhoto (API-FOOD-006)', () => {
     const entry = await createFoodEntryFromPhoto({
       mealCategoryId: 'meal-lunch',
       tempImageUri: 'file:///tmp/capture.jpg',
-      capturedAt: NOW,
+      capturedAt: new Date().toISOString(),
       analysisOptOut: true,
     });
     expect(entry.analysisStatus).toBe('not_requested');
@@ -213,8 +215,9 @@ describe('getFoodEntry / listFoodEntriesForDate (API-FOOD-007, API-FOOD-008)', (
   });
 
   it('lists a date oldest capture first', async () => {
-    const base = new Date();
-    base.setHours(12, 0, 0, 0);
+    // Anchored in the past: the repository rejects captures more than 60s ahead of now, so a
+    // fixed "noon today + 1h" pair fails when the suite runs after 12:00 local time.
+    const base = new Date(Date.now() - 3 * 3_600_000);
     const later = new Date(base.getTime() + 3_600_000);
     await makeEntry({ capturedAt: later.toISOString() });
     await makeEntry({ capturedAt: base.toISOString() });
